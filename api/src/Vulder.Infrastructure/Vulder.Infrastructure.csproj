@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Vulder.Core\Vulder.Core.csproj" />
+  </ItemGroup>
+
 </Project>

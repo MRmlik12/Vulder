@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace Vulder.Scrapper.Test
+namespace Vulder.Test
 {
     public class UnitTest1
     {
