@@ -1,4 +1,7 @@
 ﻿{
+  "ElasticsearchConfiguration": {
+    "Host": ""
+  },
   "profiles": {
     "Vulder.Search.Api": {
       "commandName": "Project",
