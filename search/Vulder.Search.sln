@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulder.Search.Core", "src\V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulder.Search.Infrastructure", "src\Vulder.Search.Infrastructure\Vulder.Search.Infrastructure.csproj", "{9DC06F41-D792-474D-9133-ED5DFE7A7BD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulder.Search.SharedKernel", "Vulder.Search.SharedKernel\Vulder.Search.SharedKernel.csproj", "{C30993CB-C079-4DD4-89E7-71593A976890}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulder.Search.SharedKernel", "src\Vulder.Search.SharedKernel\Vulder.Search.SharedKernel.csproj", "{C30993CB-C079-4DD4-89E7-71593A976890}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
