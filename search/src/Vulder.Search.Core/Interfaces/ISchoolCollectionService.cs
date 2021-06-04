@@ -1,13 +1,13 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nest;
-using Vulder.Search.Infrastructure.Data.Entities;
+using Vulder.Search.Core.ProjectAggregate.School;
 
 namespace Vulder.Search.Core.Interfaces
 {
     public interface ISchoolCollectionService
     {
         public Task<ISearchResponse<School>> Get(string input);
-        public void Create(School school);
+        public Task<School> Create(School school);
+        public Task Delete(string id);
     }
 }

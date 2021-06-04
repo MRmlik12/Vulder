@@ -5,11 +5,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Vulder.Search.SharedKernel\Vulder.Search.SharedKernel.csproj" />
       <ProjectReference Include="..\Vulder.Search.Infrastructure\Vulder.Search.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Autofac" Version="6.2.0" />
       <PackageReference Include="Elasticsearch.Net" Version="7.13.0" />
+      <PackageReference Include="MediatR" Version="9.0.0" />
     </ItemGroup>
 
 </Project>
