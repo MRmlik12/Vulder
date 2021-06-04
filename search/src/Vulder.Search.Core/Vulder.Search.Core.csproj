@@ -5,8 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Vulder.Search.SharedKernel\Vulder.Search.SharedKernel.csproj" />
       <ProjectReference Include="..\Vulder.Search.Infrastructure\Vulder.Search.Infrastructure.csproj" />
+      <ProjectReference Include="..\Vulder.Search.SharedKernel\Vulder.Search.SharedKernel.csproj" />
     </ItemGroup>
 
     <ItemGroup>
