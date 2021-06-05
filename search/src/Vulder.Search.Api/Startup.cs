@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,8 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Vulder.Search.Core;
 using Vulder.Search.Core.Services;
+using Vulder.Search.Infrastructure;
 using Vulder.Search.Infrastructure.Data.Config;
 
 namespace Vulder.Search.Api
@@ -25,32 +28,43 @@ namespace Vulder.Search.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
             services.Configure<ElasticsearchConfiguration>(
                 Configuration.GetSection(nameof(ElasticsearchConfiguration)));
             services.AddSingleton<IElasticsearchConfiguration>(sp =>
                 sp.GetRequiredService<IOptions<ElasticsearchConfiguration>>().Value);
-            services.AddSignalR();
             services.AddSingleton<SchoolsCollectionService>();
 
-            services.AddAuthentication(options =>
+            // services.AddAuthentication(options =>
+            // {
+            //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            // });
+            
+            services.AddSwaggerGen(c =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Vulder.Search.Api", Version = "v1" });
             });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new DefaultCoreModule());
+            builder.RegisterModule(new DefaultInfrastructureModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Vulder.Api v1"));
+            }
 
             app.UseRouting();
-
+            app.UseHttpsRedirection();
             app.UseAuthorization();
             app.UseAuthentication();
 

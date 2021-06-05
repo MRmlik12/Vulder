@@ -1,4 +1,5 @@
 using Autofac;
+using MediatR;
 using Vulder.Search.Core.Interfaces;
 using Vulder.Search.Core.Services;
 

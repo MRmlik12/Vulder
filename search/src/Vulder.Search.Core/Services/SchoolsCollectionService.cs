@@ -18,15 +18,13 @@ namespace Vulder.Search.Core.Services
         }
 
         public async Task<ISearchResponse<School>> Get(string input)
-        {
-            return await _client.SearchAsync<School>(s => s
+            => await _client.SearchAsync<School>(s => s
                 .Index("schools")
                 .From(0)
                 .Size(10)
                 .Query(q => q.Term(t => t.Name, input) ||
-                            q.Match(mq => mq.Field(f => f.Name).Query("nest")))
+                            q.Match(mq => mq.Field(f => f.Name).Query(input)))
             );
-        }
 
         public async Task<School> Create(School school)
         {
