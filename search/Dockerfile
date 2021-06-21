@@ -1,17 +1,14 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0.300-alpine3.13-amd64 AS build
+FROM golang:1.16.5-alpine3.14
 
 WORKDIR /src
 
-COPY . .
+COPY * *
 
-RUN dotnet restore
-RUN dotnet build -c Release
-RUN dotnet publish -c Release -o ./out
-
-FROM mcr.microsoft.com/dotnet/aspnet:5.0.6-alpine3.13-amd64
+RUN go build -o /bin/search
 
 WORKDIR /app
-COPY --from=build /src/out .
 
+ENV MONGO_URL ""
 EXPOSE 5000
-ENTRYPOINT [ "dotnet", "Vulder.Search.Api.dll" ]
+
+ENTRYPOINT ["./search"]
