@@ -10,6 +10,9 @@ namespace Vulder.Search.Core.ProjectAggregate.School
         [Required] public string Name { get; set; }
 
         [Required] public string Url { get; set; }
+        
+        [Required]
+        public string KeeperEmail { get; set; }
 
         public void GenerateId()
         {

@@ -4,9 +4,10 @@ using Vulder.Search.Core.ProjectAggregate.School;
 
 namespace Vulder.Search.Core.Interfaces
 {
-    public interface ISchoolCollectionService
+    public interface ISchoolRepository
     {
-        public Task<List<School>> Get(string input);
-        public Task Create(School school);
+        Task Create(School school);
+        Task Update(string id, School school);
+        Task<List<School>> Get(string name);
     }
 }

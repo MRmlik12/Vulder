@@ -11,7 +11,7 @@ using Microsoft.OpenApi.Models;
 using Vulder.Search.Core;
 using Vulder.Search.Core.Services;
 using Vulder.Search.Infrastructure;
-using Vulder.Search.Infrastructure.Data.Config;
+using Vulder.Search.Infrastructure.Data.Configuration;
 
 namespace Vulder.Search.Api
 {
@@ -28,13 +28,12 @@ namespace Vulder.Search.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.Configure<ElasticsearchConfiguration>(
-                Configuration.GetSection(nameof(ElasticsearchConfiguration)));
-            services.AddSingleton<IElasticsearchConfiguration>(sp =>
-                sp.GetRequiredService<IOptions<ElasticsearchConfiguration>>().Value);
-            services.AddSingleton<SchoolsCollectionService>();
-
+            services.Configure<MongoConfiguration>(
+                Configuration.GetSection(nameof(MongoConfiguration)));
+            services.AddSingleton<IMongoConfiguration>(sp =>
+                sp.GetRequiredService<IOptions<MongoConfiguration>>().Value);
+            services.AddControllers().AddControllersAsServices();
+            services.AddMongoDbContext();
             // services.AddAuthentication(options =>
             // {
             //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

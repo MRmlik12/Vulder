@@ -1,11 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
 using Module = Autofac.Module;
 using MediatR;
 using MediatR.Pipeline;
+using Vulder.Search.Core.Interfaces;
 using Vulder.Search.Core.ProjectAggregate.School;
+using Vulder.Search.Infrastructure.Data;
+using Vulder.Search.Infrastructure.Data.Repository;
 
 namespace Vulder.Search.Infrastructure
 {
@@ -17,9 +19,12 @@ namespace Vulder.Search.Infrastructure
         {
             _assemblies.Add(Assembly.GetAssembly(typeof(School)));
         }
-        
+
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<SchoolRepository>()
+                .As<ISchoolRepository>();
+            
             builder.RegisterType<Mediator>()
                 .As<IMediator>().InstancePerLifetimeScope();
 
